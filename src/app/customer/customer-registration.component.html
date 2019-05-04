@@ -1,0 +1,110 @@
+<div class="container" style="width:40%">
+    <h4 class="text-center">Registration Form</h4>
+
+
+    <!-- {{customer | json}} -->
+    <!-- {{customerForm.value | json}} -->
+    {{customerForm.form.invalid}}
+    <form (ngSubmit)="registerNewCustomer()" #customerForm="ngForm">
+        <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" required [(ngModel)]="customer.name" name="customer_name"
+                #name="ngModel" [class.is-invalid]="name.touched && name.invalid" />
+            <div class="text-danger" [class.d-none]="name.valid || name.untouched">
+                Name is required
+            </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="form-label">Email Id</label>
+            <input type="email" class="form-control" required name="email" [(ngModel)]="customer.email" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" required name="password" [(ngModel)]="customer.password" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Contact</label>
+            <input type="contact" class="form-control" required name="phone" [(ngModel)]="customer.contact"
+                pattern="^\d{10}$" #phone="ngModel" [class.is-invalid] ="phone.touched && phone.invalid" />
+
+
+
+            <div *ngIf="phone.errors && phone.touched">
+                <div class="text-danger" *ngIf="phone.errors?.required">
+                    Phone no.is required
+                </div>
+
+
+                <div class="text-danger" *ngIf="phone.errors?.pattern">
+                    Phone no.must be 10 digits
+                </div>
+            </div>
+        
+
+
+
+        <div class="form-group">
+            <label class="form-label">Gender</label>&nbsp;&nbsp;
+            <div class="form-check form-check-inline">
+                <input type="radio" name="gender" value="Male" class="form-check-input"
+                    [(ngModel)]="customer.gender" />Male
+
+            </div>
+          
+
+
+            <div class="form-check form-check-inline">
+                <input type="radio" name="gender" value="Female" class="form-check-input"
+                    [(ngModel)]="customer.gender" />Female
+
+            </div>
+            </div>
+     
+
+            <div class="form-group">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-control" required name="address"
+                    [(ngModel)]="customer.address.addressLine" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">State</label>
+                <select required class="form-control" name=state [(ngModel)]="customer.address.state">
+                    <option value="">--select--</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Telangana">Telangana</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">City</label>
+                <select class="form-control" name="city" required [(ngModel)]="customer.address.city">
+                    <option value="">--select--</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Banglore">Banglore</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Delhi">Delhi</option>
+                </select>
+            </div>
+          
+            <div class="form-group">
+                <label class="form-label">postal code</label>
+                <input type="number" class="form-control" required name="postalCode"
+                    [(ngModel)]="customer.address.postalCode" />
+            </div>
+
+            <button type="submit" class="btn btn-block btn-primary"
+                [disabled]="customerForm.form.invalid">Register</button>
+            </div>
+           
+    </form>
+    
+    
+</div>
